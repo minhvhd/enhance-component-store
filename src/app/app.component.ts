@@ -1,10 +1,21 @@
-import { Component } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { provideComponentStore } from '@ngrx/component-store';
+import { AppStore } from './app.store';
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule
+  ],
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+    app works
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    provideComponentStore(AppStore)
+  ]
 })
 export class AppComponent {
-  title = 'enhance-component-store';
+  readonly #store = inject(AppStore);
 }
